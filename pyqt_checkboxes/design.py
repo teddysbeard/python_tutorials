@@ -42,18 +42,21 @@ class Ui_Dialog(object):
         font.setPointSize(11)
         self.checkBoxPizza.setFont(font)
         self.checkBoxPizza.setObjectName("checkBoxPizza")
+        self.checkBoxPizza.stateChanged.connect(self.checked_item)  # проверка состояния чекбокса checkBoxPizza
         self.verticalLayout_6.addWidget(self.checkBoxPizza)
         self.checkBoxSalad = QtWidgets.QCheckBox(Dialog)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.checkBoxSalad.setFont(font)
         self.checkBoxSalad.setObjectName("checkBoxSalad")
+        self.checkBoxSalad.stateChanged.connect(self.checked_item)  # проверка состояния чекбокса checkBoxSalad
         self.verticalLayout_6.addWidget(self.checkBoxSalad)
         self.checkBoxSaussage = QtWidgets.QCheckBox(Dialog)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.checkBoxSaussage.setFont(font)
         self.checkBoxSaussage.setObjectName("checkBoxSaussage")
+        self.checkBoxSaussage.stateChanged.connect(self.checked_item)  # проверка состояния чекбокса checkBoxSaussage
         self.verticalLayout_6.addWidget(self.checkBoxSaussage)
         self.horizontalLayout_6.addLayout(self.verticalLayout_6)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
@@ -81,9 +84,22 @@ class Ui_Dialog(object):
         self.checkBoxSalad.setText(_translate("Dialog", "Salad : 4"))
         self.checkBoxSaussage.setText(_translate("Dialog", "Saussage : 5"))
 
+    # проверка состояния чекбокса
+
+    def checked_item(self):
+        price = 20
+        if self.checkBoxPizza.isChecked():
+            price += 3
+        if self.checkBoxSalad.isChecked():
+            price += 4
+        if self.checkBoxSaussage.isChecked():
+            price += 5
+        self.labelResult.setText("Total price is: {}".format(price))
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
